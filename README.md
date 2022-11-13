@@ -1,7 +1,7 @@
-# CPSC449Project1
+# CPSC449Project2
 
 ## Members of Team: 
-Ayush Bhardwaj, Arati Maurya, Dillon Go, Nikhil Giri
+Alejandro, Shreya, Dillon
 
 ## Steps to run our program:
 1. Navigate to the correct directory of the project file. 
@@ -13,7 +13,4 @@ Ayush Bhardwaj, Arati Maurya, Dillon Go, Nikhil Giri
 ```
 foreman start
 ```
-4. After starting the service, test using HTTPie, curl, or this link:
-```
-wordle.local.gd:5000/docs
-```
+
