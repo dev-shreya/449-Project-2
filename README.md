@@ -30,6 +30,11 @@ Game,in_progress,Completed,Guessses,Correct_words,valid_words
 
 2. user.db contains following tables:
  User table(containing username & password)
+## Functionality
+1. Splitting the monolith service into user & game
+2. Authenticating endpoints(via nginx reverse proxy)
+3. Load balancing
+4. Directing traffic
 
 ## Nginx Configuration:
 
