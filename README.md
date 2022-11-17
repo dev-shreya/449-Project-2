@@ -15,9 +15,7 @@ So, here we are using nginx reverse proxy to handle authentication.It will also 
 ```
 3. To start the service, run this line of code:
 ```
-foreman start
-
- 
+foreman start -m "game=3, user=1"
 ```
 ## Database:
  The var folder holds two Databases:
@@ -37,36 +35,39 @@ Game,in_progress,Completed,Guessses,Correct_words,valid_words
 4. Directing traffic
 
 ## Nginx Configuration:
-
-<!-- configuring nginx to load balance between three games service -->
+-configuring nginx to load balance between three games service
+-setting up the server_name pointing to tuffix-vm(in case of Tuffix 2020 VM) 
+-authenticating based on subrequest
+```
 upstream gameLoad{
          server 127.0.0.1.5000;
          server 127.0.0.1.5001;
          server 127.0.0.1.5002;
 }
 
-<!-- setting up the server_name pointing to tuffix-vm(in case of Tuffix 2020 VM) -->
 server {
        listen 80;
        listen [::]:80;
 
        server_name tuffix-vm;
+       
        location / {
                   proxy_pass http://gameLoad;
                   auth_request /auth;
                   auth_request_set $auth_status $upstream_status;
-                  }
+       }
+       
        location /user{
-                      proxy_pass http://127.0.0.1:5100;
-                     }   
+                  proxy_pass http://127.0.0.1:5100;
+       }   
 
-<!-- authenticating based on subrequest                          -->
-         location = /auth {
-            internal;
-            proxy_pass http://127.0.0.1:5100;
-            proxy_pass_request_body off;
-            proxy_set_header Content-Length "";
-            proxy_set_header X-Original-URI $request_uri;
-        }
-      }
+       location = /auth {
+                  internal;
+                  proxy_pass http://127.0.0.1:5100;
+                  proxy_pass_request_body off;
+                  proxy_set_header Content-Length "";
+                  proxy_set_header X-Original-URI $request_uri;
+       }
+}
+```
 
