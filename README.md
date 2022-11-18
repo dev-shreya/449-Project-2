@@ -15,7 +15,7 @@ So, here we are using nginx reverse proxy to handle authentication.It will also 
 ```
 3. To start the service, run this line of code:
 ```
-foreman start -m "game=3, user=1"
+foreman start -m game=3, user=1
 ```
 ## Database:
  The var folder holds two Databases:
