@@ -93,13 +93,14 @@ async def authenticate_user(username, password):
     return user
 
 # authentication API
-@app.route("/authentication")
+@app.route("/auth")
 async def authentication():
     if not request.authorization:
         return {"error": "Could not verify user"}, 401, {'WWW-Authenticate': 'Basic realm="MyApp"'}
     else:
         auth = request.authorization
         user = await authenticate_user(auth.username, auth.password)
+        print(auth.username)
         if user:
             return {"authenticated": "true"}, 200
         else:
