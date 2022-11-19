@@ -16,7 +16,7 @@ So, here we are using nginx reverse proxy to handle authentication.It will also 
 3. Configure Nginx:
 ```
 cd /etc/nginx/sites-enabled
-sudo "${EDITOR:-vi} tutorial
+sudo "${EDITOR:-vi}" tutorial
 ```
 Then paste code in the "Nginx Configuration section, then run:
 ```
