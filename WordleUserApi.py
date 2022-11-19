@@ -55,7 +55,7 @@ def index():
     )
 
 # Start of User API
-@app.route("/user/registeration", methods=["POST"])
+@app.route("/user/registration", methods=["POST"])
 @validate_request(user)
 async def register_user(data):
     db = await _get_db()
@@ -100,7 +100,6 @@ async def authentication():
     else:
         auth = request.authorization
         user = await authenticate_user(auth.username, auth.password)
-        print(auth.username)
         if user:
             return {"authenticated": "true"}, 200
         else:
@@ -115,9 +114,9 @@ def not_found(e):
 
 
 # check if user_id present in db
-async def validate_user_id(user_id):
+async def validate_username(username):
     db = await _get_db()
-    user_id = await db.fetch_one("SELECT * FROM User WHERE user_id =:user_id", values={"user_id": user_id})
+    user_id = await db.fetch_one("SELECT * FROM User WHERE username =:username", values={"username": username})
 
     if user_id:
         return user_id

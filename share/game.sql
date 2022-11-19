@@ -22,5 +22,12 @@ CREATE TABLE Correct_Words(correct_word_id INTEGER PRIMARY KEY, correct_word VAR
 DROP TABLE IF EXISTS Valid_Words;
 CREATE TABLE Valid_Words(valid_word_id INTEGER PRIMARY KEY, valid_word VARCHAR);
 
+CREATE INDEX In_Progress_idx_03a6cf4e ON In_Progress(game_id);
+CREATE INDEX Valid_Words_idx_c0412b53 ON Valid_Words(valid_word);
+CREATE INDEX Correct_Words_idx_0193f9a5 ON Correct_Words(correct_word);
+CREATE INDEX Guesses_idx_d2617697 ON Guesses(game_id, guess_num DESC);
+CREATE INDEX In_Progress_idx_25674218 ON In_Progress(username);
+CREATE INDEX Completed_idx_03a6cf4e ON Completed(game_id);
+
 COMMIT;
 

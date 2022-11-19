@@ -69,19 +69,6 @@ def not_found(e):
 
 # Start of Game API
 
-# check if user_id present in db
-async def validate_user_id(user_id):
-    db = await _get_db()
-    app.logger.info("SELECT * FROM User WHERE user_id = " + str(user_id))
-    query = "SELECT * FROM User WHERE user_id = :user_id"
-    user_id = await db.fetch_one(query=query, values={"user_id": user_id})
-
-    if user_id:
-        return user_id
-    else:
-        abort(404, "User does not exist")
-
-
 @app.errorhandler(404)
 def not_found(e):
     return {"error": str(e)}, 404
@@ -112,6 +99,7 @@ async def update_inprogress(game_id):
 @app.route("/newgame", methods=["POST"])
 async def newgame():
     db = await _get_db()
+    auth=request.authorization
     app.logger.info("SELECT correct_word FROM Correct_Words")
     secret_word = await db.fetch_all("SELECT correct_word FROM Correct_Words")
     secret_word = random.choice(secret_word)
@@ -217,7 +205,7 @@ async def guess(data):
 
     #If this is 6th guess
     else:
-        app.logger.info("SELECT guess_word FROM Guesses WHERE game_id = :game_id", values={"game_id": str(payload["game_id"])})
+        app.logger.info("SELECT guess_word FROM Guesses WHERE game_id = " + str(payload["game_id"]))
         guesses_word = await db.fetch_all("SELECT guess_word FROM Guesses WHERE game_id = :game_id", values={"game_id": str(payload["game_id"])})
         loopCount=guessCount-1
         for i in range(loopCount):
@@ -242,6 +230,7 @@ async def guess(data):
 async def get_inprogressgame():
     db = await _get_db()
     auth=request.authorization
+    app.logger.info("SELECT game_id FROM In_Progress WHERE username = " + str(auth.username))
     inprogressgames = await db.fetch_all("SELECT game_id FROM In_Progress WHERE username = :username", values={"username": auth.username})
     if inprogressgames:
         if len(inprogressgames) >= 1:
