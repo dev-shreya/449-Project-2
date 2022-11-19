@@ -1,7 +1,7 @@
 # CPSC449Project2
 
 ## Members of Team: 
-Alejandro Ramos, Shreya Bhattacharya, Dillon Go
+Alejandro Ramos, Shreya Bhattacharya, Dillon Go, Manan Patel
 
 ## Introduction:
 The goal is to split the monolith service created in Project 1(Wordle) into two seperate services User and Games and authenticating endpoints. In previous version we used HTTP basic authentication for signin endpoint but rest of the endpoints of games remained unauthenticated.
