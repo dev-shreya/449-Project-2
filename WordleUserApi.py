@@ -55,7 +55,7 @@ def index():
     )
 
 # Start of User API
-@app.route("/user/registeration", methods=["POST"])
+@app.route("/user/registration", methods=["POST"])
 @validate_request(user)
 async def register_user(data):
     db = await _get_db()
@@ -93,7 +93,7 @@ async def authenticate_user(username, password):
     return user
 
 # authentication API
-@app.route("/authentication")
+@app.route("/auth")
 async def authentication():
     if not request.authorization:
         return {"error": "Could not verify user"}, 401, {'WWW-Authenticate': 'Basic realm="MyApp"'}
@@ -114,9 +114,9 @@ def not_found(e):
 
 
 # check if user_id present in db
-async def validate_user_id(user_id):
+async def validate_username(username):
     db = await _get_db()
-    user_id = await db.fetch_one("SELECT * FROM User WHERE user_id =:user_id", values={"user_id": user_id})
+    user_id = await db.fetch_one("SELECT * FROM User WHERE username =:username", values={"username": username})
 
     if user_id:
         return user_id
