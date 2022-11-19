@@ -40,9 +40,9 @@ Game,in_progress,Completed,Guessses,Correct_words,valid_words
 -authenticating based on subrequest
 ```
 upstream gameLoad{
-         server 127.0.0.1.5000;
-         server 127.0.0.1.5001;
-         server 127.0.0.1.5002;
+         server 127.0.0.1:5000;
+         server 127.0.0.1:5001;
+         server 127.0.0.1:5002;
 }
 
 server {
