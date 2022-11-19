@@ -13,7 +13,16 @@ So, here we are using nginx reverse proxy to handle authentication.It will also 
 ```
 ./bin/init.sh
 ```
-3. To start the service, run this line of code:
+3. Configure Nginx:
+```
+cd /etc/nginx/sites-enabled
+sudo "${EDITOR:-vi} tutorial
+```
+Then paste code in the "Nginx Configuration section, then run:
+```
+sudo service nginx restart
+```
+4. To start the service, run this line of code:
 ```
 foreman start -m game=3, user=1
 ```
