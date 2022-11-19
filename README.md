@@ -22,7 +22,11 @@ Then paste code in the "Nginx Configuration section, then run:
 ```
 sudo service nginx restart
 ```
-4. To start the service, run this line of code:
+4. For logging, create a .env file with this inside:
+```
+QUART_ENV=development
+```
+5. To start the service, run this line of code:
 ```
 foreman start -m game=3, user=1
 ```
